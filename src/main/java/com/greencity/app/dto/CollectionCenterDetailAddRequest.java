@@ -1,7 +1,5 @@
 package com.greencity.app.dto;
 
-import java.util.List;
-
 public class CollectionCenterDetailAddRequest {
 	private String currentUserName;
 	private String wastetype;
@@ -9,7 +7,6 @@ public class CollectionCenterDetailAddRequest {
 	private String description;
 //	private List<String> workingDays;
 
-	
 	public String getWastetype() {
 		return wastetype;
 	}
@@ -49,6 +46,5 @@ public class CollectionCenterDetailAddRequest {
 //	public void setWorkingDays(List<String> workingDays) {
 //		this.workingDays = workingDays;
 //	}
-
 
 }
