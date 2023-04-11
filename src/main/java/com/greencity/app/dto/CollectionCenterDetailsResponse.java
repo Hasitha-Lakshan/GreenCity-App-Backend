@@ -1,7 +1,6 @@
 package com.greencity.app.dto;
 
 public class CollectionCenterDetailsResponse {
-	private  int centerId;
 	private String username;
 	private String centerName;
 	private int contactNumber;
@@ -10,21 +9,11 @@ public class CollectionCenterDetailsResponse {
 	private String addressLine2;
 	private String addressLine3;
 	private String location;
+	private String description;
 	private String wastetype;
 	private int payment;
-	private String description;
-//	private List<String> workingDays;
-	private boolean moreDetailStatus;
-	private boolean status;
-	
-	
-	public int getCenterId() {
-		return centerId;
-	}
-
-	public void setCenterId(int centerId) {
-		this.centerId = centerId;
-	}
+	private Boolean active;
+	private boolean accountStatus;
 
 	public String getUsername() {
 		return username;
@@ -90,6 +79,14 @@ public class CollectionCenterDetailsResponse {
 		this.location = location;
 	}
 
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getWastetype() {
 		return wastetype;
 	}
@@ -106,28 +103,20 @@ public class CollectionCenterDetailsResponse {
 		this.payment = payment;
 	}
 
-	public String getDescription() {
-		return description;
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
-	public boolean getMoreDetailStatus() {
-		return moreDetailStatus;
+	public boolean isAccountStatus() {
+		return accountStatus;
 	}
 
-	public void setMoreDetailStatus(boolean moreDetailStatus) {
-		this.moreDetailStatus = moreDetailStatus;
-	}
-
-	public boolean getStatus() {
-		return status;
-	}
-
-	public void setStatus(boolean status) {
-		this.status = status;
+	public void setAccountStatus(boolean accountStatus) {
+		this.accountStatus = accountStatus;
 	}
 
 }

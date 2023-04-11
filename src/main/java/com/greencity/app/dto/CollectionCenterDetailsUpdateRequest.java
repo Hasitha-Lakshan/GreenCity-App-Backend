@@ -1,24 +1,18 @@
 package com.greencity.app.dto;
 
-public class CollectionCenterDetailsUpdateRequset {
-	private String currentUserName;
+public class CollectionCenterDetailsUpdateRequest {
 	private String username;
 	private String centername;
 	private int contactnumber;
-	private String email;
 	private String addressline1;
 	private String addressline2;
 	private String addressline3;
 	private String location;
-	private String status;
-
-	public String getCurrentUserName() {
-		return currentUserName;
-	}
-
-	public void setCurrentUserName(String currentUserName) {
-		this.currentUserName = currentUserName;
-	}
+	private String wastetype;
+	private int payment;
+	private String description;
+	private Boolean active;
+	private Boolean accountStatus;
 
 	public String getUsername() {
 		return username;
@@ -42,14 +36,6 @@ public class CollectionCenterDetailsUpdateRequset {
 
 	public void setContactnumber(int contactnumber) {
 		this.contactnumber = contactnumber;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
 	}
 
 	public String getAddressline1() {
@@ -84,12 +70,44 @@ public class CollectionCenterDetailsUpdateRequset {
 		this.location = location;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getWastetype() {
+		return wastetype;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setWastetype(String wastetype) {
+		this.wastetype = wastetype;
+	}
+
+	public int getPayment() {
+		return payment;
+	}
+
+	public void setPayment(int payment) {
+		this.payment = payment;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public Boolean getAccountStatus() {
+		return accountStatus;
+	}
+
+	public void setAccountStatus(Boolean accountStatus) {
+		this.accountStatus = accountStatus;
 	}
 
 }

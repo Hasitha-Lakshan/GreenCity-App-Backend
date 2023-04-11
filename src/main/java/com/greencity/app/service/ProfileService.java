@@ -4,14 +4,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.greencity.app.dto.CollectionCenterDetailAddRequest;
 import com.greencity.app.dto.CollectionCenterDetailsResponse;
-import com.greencity.app.dto.CollectionCenterDetailsUpdateRequset;
-import com.greencity.app.dto.CollectionCenterFullDetailsUpdateRequset;
+import com.greencity.app.dto.CollectionCenterDetailsUpdateRequest;
+import com.greencity.app.dto.CollectionCenterSettingsResponse;
+import com.greencity.app.dto.CollectionCenterSettingsUpdateRequset;
 import com.greencity.app.dto.CommonResponse;
-import com.greencity.app.dto.ProfileDetailsRequest;
-import com.greencity.app.dto.UserDetailsResponse;
-import com.greencity.app.dto.UserDetailsUpdateRequset;
+import com.greencity.app.dto.ProfileRequest;
+import com.greencity.app.dto.UserSettingsResponse;
+import com.greencity.app.dto.UserSettingsUpdateRequest;
 import com.greencity.app.entity.CollectionCenter;
 import com.greencity.app.entity.User;
 import com.greencity.app.repository.CollectionCenterRepository;
@@ -32,11 +32,12 @@ public class ProfileService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	public UserDetailsResponse getUserDetails(ProfileDetailsRequest profileDetailsRequest) {
+	// This function is used to get user settings using username
+	public UserSettingsResponse getUserSettings(ProfileRequest profileDetailsRequest) {
 		if (profileDetailsRequest != null && profileDetailsRequest.getRole().equals("USER")) {
 			User user = userRepository.findByUsername(profileDetailsRequest.getUsername());
 			if (user != null) {
-				UserDetailsResponse userDetailsResponse = new UserDetailsResponse();
+				UserSettingsResponse userDetailsResponse = new UserSettingsResponse();
 				userDetailsResponse.setUsername(user.getUsername());
 				userDetailsResponse.setFirstName(user.getFirstName());
 				userDetailsResponse.setLastName(user.getLastName());
@@ -45,57 +46,25 @@ public class ProfileService {
 				userDetailsResponse.setAddressLine1(user.getAddressLine1());
 				userDetailsResponse.setAddressLine2(user.getAddressLine2());
 				userDetailsResponse.setAddressLine3(user.getAddressLine3());
-
 				return userDetailsResponse;
 			}
 		}
 		return null;
 	}
-
-	public CollectionCenterDetailsResponse getCollectionCenterDetails(ProfileDetailsRequest profileDetailsRequest) {
-		if (profileDetailsRequest != null && profileDetailsRequest.getRole().equals("COLLECTION_CENTER")) {
-			CollectionCenter collectionCenter = collectionCenterRepository
-					.findByUsername(profileDetailsRequest.getUsername());
-			if (collectionCenter != null) {
-				CollectionCenterDetailsResponse collectionCenterDetailsResponse = new CollectionCenterDetailsResponse();
-				collectionCenterDetailsResponse.setCenterId(collectionCenter.getCenterId());
-				collectionCenterDetailsResponse.setUsername(collectionCenter.getUsername());
-				collectionCenterDetailsResponse.setCenterName(collectionCenter.getCentertName());
-				collectionCenterDetailsResponse.setEmail(collectionCenter.getEmail());
-				collectionCenterDetailsResponse.setContactNumber(collectionCenter.getContactNumber());
-				collectionCenterDetailsResponse.setAddressLine1(collectionCenter.getAddressLine1());
-				collectionCenterDetailsResponse.setAddressLine2(collectionCenter.getAddressLine2());
-				collectionCenterDetailsResponse.setAddressLine3(collectionCenter.getAddressLine3());
-				collectionCenterDetailsResponse.setLocation(collectionCenter.getLocation());
-				collectionCenterDetailsResponse.setWastetype(collectionCenter.getWaste_type());
-				collectionCenterDetailsResponse.setPayment(collectionCenter.getPayment());
-				collectionCenterDetailsResponse.setDescription(collectionCenter.getDescription());
-//				collectionCenterDetailsResponse.setMoreDetailStatus(collectionCenter.isMoreDetailStatus());
-//				collectionCenterDetailsResponse.setStatus(collectionCenter.isActive_or_disable());
-				return collectionCenterDetailsResponse;
-			}
-		}
-		return null;
-	}
-
-	public CommonResponse<String> updateUserDetails(UserDetailsUpdateRequset userDetailsUpdateRequset) {
-		if (userDetailsUpdateRequset != null) {
-			User user = userRepository.findByUsername(userDetailsUpdateRequset.getCurrentUserName());
+	
+	// This function is used to update user settings using username
+	public CommonResponse<String> updateUserSettings(UserSettingsUpdateRequest userSettingsUpdateRequest) {
+		if (userSettingsUpdateRequest != null) {
+			User user = userRepository.findByUsername(userSettingsUpdateRequest.getUsername());
 			if (user != null) {
-				user.setFirstName(userDetailsUpdateRequset.getFirstName());
-				user.setLastName(userDetailsUpdateRequset.getLastName());
-				user.setUsername(userDetailsUpdateRequset.getUsername());
-				user.setContactNumber(userDetailsUpdateRequset.getContactNumber());
-				user.setEmail(userDetailsUpdateRequset.getEmail());
-				user.setAddressLine1(userDetailsUpdateRequset.getAddressLine1());
-				user.setAddressLine2(userDetailsUpdateRequset.getAddressLine2());
-				user.setAddressLine3(userDetailsUpdateRequset.getAddressLine3());
-				if (userDetailsUpdateRequset.getStatus().equals("off")) {
-					user.setActive_or_disable(false);
-				} else if (userDetailsUpdateRequset.getStatus().equals("on")) {
-					user.setActive_or_disable(true);
-				}
+				user.setFirstName(userSettingsUpdateRequest.getFirstName());
+				user.setLastName(userSettingsUpdateRequest.getLastName());
+				user.setContactNumber(userSettingsUpdateRequest.getContactNumber());
+				user.setAddressLine1(userSettingsUpdateRequest.getAddressLine1());
+				user.setAddressLine2(userSettingsUpdateRequest.getAddressLine2());
+				user.setAddressLine3(userSettingsUpdateRequest.getAddressLine3());
 				userRepository.save(user);
+				
 				commonResponse.setResponse("User details updated successfully");
 				commonResponse.setStatus(true);
 				return commonResponse;
@@ -112,26 +81,40 @@ public class ProfileService {
 		}
 	}
 
-	public CommonResponse<String> updateCollectionCenterDetails(
-			CollectionCenterDetailsUpdateRequset collectionCenterDetailsUpdateRequset) {
-		if (collectionCenterDetailsUpdateRequset != null) {
-			CollectionCenter collectionCenter = collectionCenterRepository
-					.findByUsername(collectionCenterDetailsUpdateRequset.getCurrentUserName());
+	// This function is used to get collection center settings using username
+	public CollectionCenterSettingsResponse getCollectionCenterSettings(ProfileRequest profileRequest) {
+		if (profileRequest != null && profileRequest.getRole().equals("COLLECTION_CENTER")) {
+			CollectionCenter collectionCenter = collectionCenterRepository.findByUsername(profileRequest.getUsername());
 			if (collectionCenter != null) {
-				collectionCenter.setUsername(collectionCenterDetailsUpdateRequset.getUsername());
-				collectionCenter.setCentertName(collectionCenterDetailsUpdateRequset.getCentername());
-				collectionCenter.setContactNumber(collectionCenterDetailsUpdateRequset.getContactnumber());
-				collectionCenter.setEmail(collectionCenterDetailsUpdateRequset.getEmail());
-				collectionCenter.setAddressLine1(collectionCenterDetailsUpdateRequset.getAddressline1());
-				collectionCenter.setAddressLine2(collectionCenterDetailsUpdateRequset.getAddressline2());
-				collectionCenter.setAddressLine3(collectionCenterDetailsUpdateRequset.getAddressline3());
-				collectionCenter.setLocation(collectionCenterDetailsUpdateRequset.getLocation());
-//				if (collectionCenterDetailsUpdateRequset.getStatus().equals("off")) {
-//					collectionCenter.setActive_or_disable(false);
-//				} else if (collectionCenterDetailsUpdateRequset.getStatus().equals("on")) {
-//					collectionCenter.setActive_or_disable(true);
-//				}
-//				collectionCenterRepository.save(collectionCenter);
+				CollectionCenterSettingsResponse response = new CollectionCenterSettingsResponse();
+				response.setUsername(collectionCenter.getUsername());
+				response.setCenterName(collectionCenter.getCentertName());
+				response.setEmail(collectionCenter.getEmail());
+				response.setContactNumber(collectionCenter.getContactNumber());
+				response.setAddressLine1(collectionCenter.getAddressLine1());
+				response.setAddressLine2(collectionCenter.getAddressLine2());
+				response.setAddressLine3(collectionCenter.getAddressLine3());
+				response.setLocation(collectionCenter.getLocation());
+				response.setActive(collectionCenter.isActive());
+				return response;
+			}
+		}
+		return null;
+	}
+	
+	// This function is used to update collection center settings using username
+	public CommonResponse<String> updateCollectionCenterSettings(CollectionCenterSettingsUpdateRequset collectionCenterSettingsUpdateRequset) {
+		if (collectionCenterSettingsUpdateRequset != null) {
+			CollectionCenter collectionCenter = collectionCenterRepository.findByUsername(collectionCenterSettingsUpdateRequset.getUsername());
+			if (collectionCenter != null) {
+				collectionCenter.setCentertName(collectionCenterSettingsUpdateRequset.getCenterName());
+				collectionCenter.setContactNumber(collectionCenterSettingsUpdateRequset.getContactNumber());
+				collectionCenter.setAddressLine1(collectionCenterSettingsUpdateRequset.getAddressLine1());
+				collectionCenter.setAddressLine2(collectionCenterSettingsUpdateRequset.getAddressLine2());
+				collectionCenter.setAddressLine3(collectionCenterSettingsUpdateRequset.getAddressLine3());
+				collectionCenter.setLocation(collectionCenterSettingsUpdateRequset.getLocation());
+				collectionCenterRepository.save(collectionCenter);
+				
 				commonResponse.setResponse("Collection center details updated successfully");
 				commonResponse.setStatus(true);
 				return commonResponse;
@@ -147,57 +130,47 @@ public class ProfileService {
 		}
 	}
 
-	public CommonResponse<String> updateFullCollectionCenterDetails(
-			CollectionCenterFullDetailsUpdateRequset collectionCenterDetailsFullUpdateRequset) {
-		if (collectionCenterDetailsFullUpdateRequset != null) {
-			CollectionCenter collectionCenter = collectionCenterRepository
-					.findByUsername(collectionCenterDetailsFullUpdateRequset.getCurrentUserName());
+	// This function is used to get collection center details
+	public CollectionCenterDetailsResponse getCollectionCenterDetails(ProfileRequest profileRequest) {
+		if (profileRequest != null && profileRequest.getRole().equals("COLLECTION_CENTER")) {
+			CollectionCenter collectionCenter = collectionCenterRepository.findByUsername(profileRequest.getUsername());
 			if (collectionCenter != null) {
-				collectionCenter.setUsername(collectionCenterDetailsFullUpdateRequset.getUsername());
-				collectionCenter.setCentertName(collectionCenterDetailsFullUpdateRequset.getCentername());
-				collectionCenter.setContactNumber(collectionCenterDetailsFullUpdateRequset.getContactnumber());
-				collectionCenter.setEmail(collectionCenterDetailsFullUpdateRequset.getEmail());
-				collectionCenter.setAddressLine1(collectionCenterDetailsFullUpdateRequset.getAddressline1());
-				collectionCenter.setAddressLine2(collectionCenterDetailsFullUpdateRequset.getAddressline2());
-				collectionCenter.setAddressLine3(collectionCenterDetailsFullUpdateRequset.getAddressline3());
-				collectionCenter.setLocation(collectionCenterDetailsFullUpdateRequset.getLocation());
-				collectionCenter.setWaste_type(collectionCenterDetailsFullUpdateRequset.getWastetype());
-				collectionCenter.setPayment(collectionCenterDetailsFullUpdateRequset.getPayment());
-				collectionCenter.setDescription(collectionCenterDetailsFullUpdateRequset.getDescription());
-//				if (collectionCenterDetailsFullUpdateRequset.getStatus().equals("off")) {
-//					collectionCenter.setActive_or_disable(false);
-//				} else if (collectionCenterDetailsFullUpdateRequset.getStatus().equals("on")) {
-//					collectionCenter.setActive_or_disable(true);
-//				}
-				collectionCenterRepository.save(collectionCenter);
-				commonResponse.setResponse("Collection center details updated successfully");
-				commonResponse.setStatus(true);
-				return commonResponse;
-			} else {
-				commonResponse.setResponse("Invalid username");
-				commonResponse.setStatus(false);
-				return commonResponse;
+				CollectionCenterDetailsResponse collectionCenterDetailsResponse = new CollectionCenterDetailsResponse();
+				collectionCenterDetailsResponse.setUsername(collectionCenter.getUsername());
+				collectionCenterDetailsResponse.setCenterName(collectionCenter.getCentertName());
+				collectionCenterDetailsResponse.setEmail(collectionCenter.getEmail());
+				collectionCenterDetailsResponse.setContactNumber(collectionCenter.getContactNumber());
+				collectionCenterDetailsResponse.setAddressLine1(collectionCenter.getAddressLine1());
+				collectionCenterDetailsResponse.setAddressLine2(collectionCenter.getAddressLine2());
+				collectionCenterDetailsResponse.setAddressLine3(collectionCenter.getAddressLine3());
+				collectionCenterDetailsResponse.setLocation(collectionCenter.getLocation());
+				collectionCenterDetailsResponse.setWastetype(collectionCenter.getWaste_type());
+				collectionCenterDetailsResponse.setPayment(collectionCenter.getPayment());
+				collectionCenterDetailsResponse.setDescription(collectionCenter.getDescription());
+				collectionCenterDetailsResponse.setActive(collectionCenter.isActive());
+				return collectionCenterDetailsResponse;
 			}
-		} else {
-			commonResponse.setResponse("Invalid request");
-			commonResponse.setStatus(false);
-			return commonResponse;
 		}
+		return null;
 	}
 
-	public CommonResponse<String> addCollectionCenterDetails(
-			CollectionCenterDetailAddRequest collectionCenterDetailAddRequest) {
-		if (collectionCenterDetailAddRequest != null) {
-			CollectionCenter collectionCenter = collectionCenterRepository
-					.findByUsername(collectionCenterDetailAddRequest.getCurrentUserName());
+	// This function is used to update collection center details
+	public CommonResponse<String> updateCollectionCenterDetails(CollectionCenterDetailsUpdateRequest collectionCenterDetailsUpdateRequest) {
+		if (collectionCenterDetailsUpdateRequest != null) {
+			CollectionCenter collectionCenter = collectionCenterRepository.findByUsername(collectionCenterDetailsUpdateRequest.getUsername());
 			if (collectionCenter != null) {
-				collectionCenter.setWaste_type(collectionCenterDetailAddRequest.getWastetype());
-				collectionCenter.setPayment(collectionCenterDetailAddRequest.getPayment());
-				collectionCenter.setDescription(collectionCenterDetailAddRequest.getDescription());
-//				collectionCenter.setCollectionCenter_WorkingDays(collectionCenterDetailAddRequest.getWorkingDays());
-//				collectionCenter.setMoreDetailStatus(true);
+				collectionCenter.setCentertName(collectionCenterDetailsUpdateRequest.getCentername());
+				collectionCenter.setContactNumber(collectionCenterDetailsUpdateRequest.getContactnumber());
+				collectionCenter.setAddressLine1(collectionCenterDetailsUpdateRequest.getAddressline1());
+				collectionCenter.setAddressLine2(collectionCenterDetailsUpdateRequest.getAddressline2());
+				collectionCenter.setAddressLine3(collectionCenterDetailsUpdateRequest.getAddressline3());
+				collectionCenter.setLocation(collectionCenterDetailsUpdateRequest.getLocation());
+				collectionCenter.setWaste_type(collectionCenterDetailsUpdateRequest.getWastetype());
+				collectionCenter.setPayment(collectionCenterDetailsUpdateRequest.getPayment());
+				collectionCenter.setDescription(collectionCenterDetailsUpdateRequest.getDescription());
 				collectionCenterRepository.save(collectionCenter);
-				commonResponse.setResponse("Collection center new details added  successfully");
+				
+				commonResponse.setResponse("Collection center details updated successfully");
 				commonResponse.setStatus(true);
 				return commonResponse;
 			} else {

@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.greencity.app.dto.CollectionCenterDetailsResponse;
 import com.greencity.app.dto.CommonResponse;
-import com.greencity.app.dto.ProfileDetailsRequest;
+import com.greencity.app.dto.ProfileRequest;
 import com.greencity.app.service.PublicService;
 
 @RestController
@@ -32,7 +32,7 @@ public class PublicController {
 	
 	@PostMapping("collectionCenter")
 	public ResponseEntity<CollectionCenterDetailsResponse> getCollectionCenterDetails(
-			@RequestBody ProfileDetailsRequest profileDetailsReques) {
+			@RequestBody ProfileRequest profileDetailsReques) {
 		return new ResponseEntity<CollectionCenterDetailsResponse>(
 				publicService.getCollectionCenterDetails(profileDetailsReques), 
 				HttpStatus.OK);

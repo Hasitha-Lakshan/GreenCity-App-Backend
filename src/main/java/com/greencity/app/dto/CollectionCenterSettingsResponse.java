@@ -1,43 +1,30 @@
 package com.greencity.app.dto;
 
-public class UserDetailsUpdateRequset {
-	private String currentUserName;
-	private String firstName;
-	private String lastName;
+public class CollectionCenterSettingsResponse {
+	private String username;
+	private String centerName;
 	private int contactNumber;
 	private String email;
 	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
-	private String username;
-	private String status;
-//	private String password;
+	private String location;
+	private Boolean active;
 
-	
-
-
-	public String getCurrentUserName() {
-		return currentUserName;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setCurrentUserName(String currentUserName) {
-		this.currentUserName = currentUserName;
-	}
-	
-	public String getFirstName() {
-		return firstName;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
-	public void setFirstName(String firstName) {
-		this.firstName = firstName;
+	public String getCenterName() {
+		return centerName;
 	}
 
-	public String getLastName() {
-		return lastName;
-	}
-
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setCenterName(String centerName) {
+		this.centerName = centerName;
 	}
 
 	public int getContactNumber() {
@@ -80,22 +67,20 @@ public class UserDetailsUpdateRequset {
 		this.addressLine3 = addressLine3;
 	}
 
-	public String getUsername() {
-		return username;
+	public String getLocation() {
+		return location;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setLocation(String location) {
+		this.location = location;
 	}
 
-	public String getStatus() {
-		return status;
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
-	
-	
 
 }

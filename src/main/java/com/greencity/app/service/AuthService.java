@@ -115,7 +115,6 @@ public class AuthService {
 				user.setAddressLine1(registerRequest.getAddressLine1());
 				user.setAddressLine2(registerRequest.getAddressLine2());
 				user.setAddressLine3(registerRequest.getAddressLine3());
-				user.setActive_or_disable(true);
 				user.setAccountStatus(true);
 				user.setAdmin(false);
 

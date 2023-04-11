@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.greencity.app.dto.CollectionCenterDetailsResponse;
 import com.greencity.app.dto.CommonResponse;
-import com.greencity.app.dto.ProfileDetailsRequest;
+import com.greencity.app.dto.ProfileRequest;
 import com.greencity.app.entity.CollectionCenter;
 import com.greencity.app.repository.CollectionCenterRepository;
 
@@ -49,7 +49,7 @@ public class PublicService {
 		return commonResponse;
 	}
 
-	public CollectionCenterDetailsResponse getCollectionCenterDetails(ProfileDetailsRequest profileDetailsRequest) {
+	public CollectionCenterDetailsResponse getCollectionCenterDetails(ProfileRequest profileDetailsRequest) {
 		if (profileDetailsRequest != null && profileDetailsRequest.getRole().equals("COLLECTION_CENTER")) {
 			CollectionCenter collectionCenter = collectionCenterRepository
 					.findByUsername(profileDetailsRequest.getUsername());

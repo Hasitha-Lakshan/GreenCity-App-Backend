@@ -56,19 +56,16 @@ public class User {
 	private String addressLine3;
 	@NotEmpty
 	@Column
-	private boolean active_or_disable;
-	@NotEmpty
-	@Column
 	private boolean accountStatus;
 	@NotEmpty
 	@Column
 	private boolean isAdmin;
-	
-	////////////////////////////// Relationship /////////////////////////////////
-	
+
+	////////////////////////////// Relationships ////////////////////////////////
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
 	private List<Customer_Request> request;
-	
+
 	////////////////////////////////////////////////////////////////////////////
 
 	public int getUserId() {
@@ -149,14 +146,6 @@ public class User {
 
 	public void setAddressLine3(String addressLine3) {
 		this.addressLine3 = addressLine3;
-	}
-	
-	public boolean isActive_or_disable() {
-		return active_or_disable;
-	}
-
-	public void setActive_or_disable(boolean active_or_disable) {
-		this.active_or_disable = active_or_disable;
 	}
 
 	public boolean isAccountStatus() {

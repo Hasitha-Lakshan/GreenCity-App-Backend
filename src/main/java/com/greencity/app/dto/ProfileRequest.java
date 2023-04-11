@@ -1,6 +1,6 @@
 package com.greencity.app.dto;
 
-public class ProfileDetailsRequest {
+public class ProfileRequest {
 
 	private String username;
 	private String role;
