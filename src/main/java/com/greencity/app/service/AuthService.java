@@ -221,8 +221,7 @@ public class AuthService {
 				collectionCenter.setAddressLine2(registerRequest.getAddressLine2());
 				collectionCenter.setAddressLine3(registerRequest.getAddressLine3());
 				collectionCenter.setLocation(registerRequest.getLocation());
-				collectionCenter.setMoreDetailStatus(false);
-				collectionCenter.setActive_or_disable(true);
+				collectionCenter.setActive(false);
 				collectionCenter.setAccountStatus(true);
 
 				if (!registerRequest.getPassword().equals(registerRequest.getConfirmPassword())) {

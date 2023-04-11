@@ -9,7 +9,6 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -67,10 +66,7 @@ public class CollectionCenter {
 	private int payment;
 	@NotEmpty
 	@Column
-	private boolean moreDetailStatus;
-	@NotEmpty
-	@Column
-	private boolean active_or_disable;
+	private boolean active;
 	@NotEmpty
 	@Column
 	private boolean accountStatus;
@@ -82,9 +78,9 @@ public class CollectionCenter {
 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collectionCenter", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Customer_Request> requests;
-	
-	/////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+
+	////////////////////////////////////////////////////////////////////////////
+
 	public int getCenterId() {
 		return centerId;
 	}
@@ -189,20 +185,12 @@ public class CollectionCenter {
 		this.payment = payment;
 	}
 
-	public boolean isMoreDetailStatus() {
-		return moreDetailStatus;
+	public boolean isActive() {
+		return active;
 	}
 
-	public void setMoreDetailStatus(boolean moreDetailStatus) {
-		this.moreDetailStatus = moreDetailStatus;
-	}
-
-	public boolean isActive_or_disable() {
-		return active_or_disable;
-	}
-
-	public void setActive_or_disable(boolean active_or_disable) {
-		this.active_or_disable = active_or_disable;
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	public boolean isAccountStatus() {
@@ -221,13 +209,11 @@ public class CollectionCenter {
 		this.collectionCenter_WorkingDays = collectionCenter_WorkingDays;
 	}
 
-	/////////////////////////////////////////////////////////////////////////////
+	public List<Customer_Request> getRequests() {
+		return requests;
+	}
 
-
-	
-	
-
-
-	
-	
+	public void setRequests(List<Customer_Request> requests) {
+		this.requests = requests;
+	}
 }

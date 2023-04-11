@@ -70,8 +70,8 @@ public class ProfileService {
 				collectionCenterDetailsResponse.setWastetype(collectionCenter.getWaste_type());
 				collectionCenterDetailsResponse.setPayment(collectionCenter.getPayment());
 				collectionCenterDetailsResponse.setDescription(collectionCenter.getDescription());
-				collectionCenterDetailsResponse.setMoreDetailStatus(collectionCenter.isMoreDetailStatus());
-				collectionCenterDetailsResponse.setStatus(collectionCenter.isActive_or_disable());
+//				collectionCenterDetailsResponse.setMoreDetailStatus(collectionCenter.isMoreDetailStatus());
+//				collectionCenterDetailsResponse.setStatus(collectionCenter.isActive_or_disable());
 				return collectionCenterDetailsResponse;
 			}
 		}
@@ -82,24 +82,24 @@ public class ProfileService {
 		if (userDetailsUpdateRequset != null) {
 			User user = userRepository.findByUsername(userDetailsUpdateRequset.getCurrentUserName());
 			if (user != null) {
-					user.setFirstName(userDetailsUpdateRequset.getFirstName());
-					user.setLastName(userDetailsUpdateRequset.getLastName());
-					user.setUsername(userDetailsUpdateRequset.getUsername());
-					user.setContactNumber(userDetailsUpdateRequset.getContactNumber());
-					user.setEmail(userDetailsUpdateRequset.getEmail());
-					user.setAddressLine1(userDetailsUpdateRequset.getAddressLine1());
-					user.setAddressLine2(userDetailsUpdateRequset.getAddressLine2());
-					user.setAddressLine3(userDetailsUpdateRequset.getAddressLine3());
-					if (userDetailsUpdateRequset.getStatus().equals("off")) {
-						user.setActive_or_disable(false);
-					}else if (userDetailsUpdateRequset.getStatus().equals("on")) {
-						user.setActive_or_disable(true);
-					}
-					userRepository.save(user);
-					commonResponse.setResponse("User details updated successfully");
-					commonResponse.setStatus(true);
-					return commonResponse;
-					
+				user.setFirstName(userDetailsUpdateRequset.getFirstName());
+				user.setLastName(userDetailsUpdateRequset.getLastName());
+				user.setUsername(userDetailsUpdateRequset.getUsername());
+				user.setContactNumber(userDetailsUpdateRequset.getContactNumber());
+				user.setEmail(userDetailsUpdateRequset.getEmail());
+				user.setAddressLine1(userDetailsUpdateRequset.getAddressLine1());
+				user.setAddressLine2(userDetailsUpdateRequset.getAddressLine2());
+				user.setAddressLine3(userDetailsUpdateRequset.getAddressLine3());
+				if (userDetailsUpdateRequset.getStatus().equals("off")) {
+					user.setActive_or_disable(false);
+				} else if (userDetailsUpdateRequset.getStatus().equals("on")) {
+					user.setActive_or_disable(true);
+				}
+				userRepository.save(user);
+				commonResponse.setResponse("User details updated successfully");
+				commonResponse.setStatus(true);
+				return commonResponse;
+
 			} else {
 				commonResponse.setResponse("Invalid username");
 				commonResponse.setStatus(false);
@@ -119,22 +119,22 @@ public class ProfileService {
 					.findByUsername(collectionCenterDetailsUpdateRequset.getCurrentUserName());
 			if (collectionCenter != null) {
 				collectionCenter.setUsername(collectionCenterDetailsUpdateRequset.getUsername());
-					collectionCenter.setCentertName(collectionCenterDetailsUpdateRequset.getCentername());
-					collectionCenter.setContactNumber(collectionCenterDetailsUpdateRequset.getContactnumber());
-					collectionCenter.setEmail(collectionCenterDetailsUpdateRequset.getEmail());
-					collectionCenter.setAddressLine1(collectionCenterDetailsUpdateRequset.getAddressline1());
-					collectionCenter.setAddressLine2(collectionCenterDetailsUpdateRequset.getAddressline2());
-					collectionCenter.setAddressLine3(collectionCenterDetailsUpdateRequset.getAddressline3());
-					collectionCenter.setLocation(collectionCenterDetailsUpdateRequset.getLocation());
-					if (collectionCenterDetailsUpdateRequset.getStatus().equals("off")) {
-						collectionCenter.setActive_or_disable(false);
-					}else if (collectionCenterDetailsUpdateRequset.getStatus().equals("on")) {
-						collectionCenter.setActive_or_disable(true);
-					}
-					collectionCenterRepository.save(collectionCenter);
-					commonResponse.setResponse("Collection center details updated successfully");
-					commonResponse.setStatus(true);
-					return commonResponse;
+				collectionCenter.setCentertName(collectionCenterDetailsUpdateRequset.getCentername());
+				collectionCenter.setContactNumber(collectionCenterDetailsUpdateRequset.getContactnumber());
+				collectionCenter.setEmail(collectionCenterDetailsUpdateRequset.getEmail());
+				collectionCenter.setAddressLine1(collectionCenterDetailsUpdateRequset.getAddressline1());
+				collectionCenter.setAddressLine2(collectionCenterDetailsUpdateRequset.getAddressline2());
+				collectionCenter.setAddressLine3(collectionCenterDetailsUpdateRequset.getAddressline3());
+				collectionCenter.setLocation(collectionCenterDetailsUpdateRequset.getLocation());
+//				if (collectionCenterDetailsUpdateRequset.getStatus().equals("off")) {
+//					collectionCenter.setActive_or_disable(false);
+//				} else if (collectionCenterDetailsUpdateRequset.getStatus().equals("on")) {
+//					collectionCenter.setActive_or_disable(true);
+//				}
+//				collectionCenterRepository.save(collectionCenter);
+				commonResponse.setResponse("Collection center details updated successfully");
+				commonResponse.setStatus(true);
+				return commonResponse;
 			} else {
 				commonResponse.setResponse("Invalid username");
 				commonResponse.setStatus(false);
@@ -146,7 +146,7 @@ public class ProfileService {
 			return commonResponse;
 		}
 	}
-	
+
 	public CommonResponse<String> updateFullCollectionCenterDetails(
 			CollectionCenterFullDetailsUpdateRequset collectionCenterDetailsFullUpdateRequset) {
 		if (collectionCenterDetailsFullUpdateRequset != null) {
@@ -154,25 +154,25 @@ public class ProfileService {
 					.findByUsername(collectionCenterDetailsFullUpdateRequset.getCurrentUserName());
 			if (collectionCenter != null) {
 				collectionCenter.setUsername(collectionCenterDetailsFullUpdateRequset.getUsername());
-					collectionCenter.setCentertName(collectionCenterDetailsFullUpdateRequset.getCentername());
-					collectionCenter.setContactNumber(collectionCenterDetailsFullUpdateRequset.getContactnumber());
-					collectionCenter.setEmail(collectionCenterDetailsFullUpdateRequset.getEmail());
-					collectionCenter.setAddressLine1(collectionCenterDetailsFullUpdateRequset.getAddressline1());
-					collectionCenter.setAddressLine2(collectionCenterDetailsFullUpdateRequset.getAddressline2());
-					collectionCenter.setAddressLine3(collectionCenterDetailsFullUpdateRequset.getAddressline3());
-					collectionCenter.setLocation(collectionCenterDetailsFullUpdateRequset.getLocation());
-					collectionCenter.setWaste_type(collectionCenterDetailsFullUpdateRequset.getWastetype());
-					collectionCenter.setPayment(collectionCenterDetailsFullUpdateRequset.getPayment());
-					collectionCenter.setDescription(collectionCenterDetailsFullUpdateRequset.getDescription());
-					if (collectionCenterDetailsFullUpdateRequset.getStatus().equals("off")) {
-						collectionCenter.setActive_or_disable(false);
-					}else if (collectionCenterDetailsFullUpdateRequset.getStatus().equals("on")) {
-						collectionCenter.setActive_or_disable(true);
-					}
-					collectionCenterRepository.save(collectionCenter);
-					commonResponse.setResponse("Collection center details updated successfully");
-					commonResponse.setStatus(true);
-					return commonResponse;
+				collectionCenter.setCentertName(collectionCenterDetailsFullUpdateRequset.getCentername());
+				collectionCenter.setContactNumber(collectionCenterDetailsFullUpdateRequset.getContactnumber());
+				collectionCenter.setEmail(collectionCenterDetailsFullUpdateRequset.getEmail());
+				collectionCenter.setAddressLine1(collectionCenterDetailsFullUpdateRequset.getAddressline1());
+				collectionCenter.setAddressLine2(collectionCenterDetailsFullUpdateRequset.getAddressline2());
+				collectionCenter.setAddressLine3(collectionCenterDetailsFullUpdateRequset.getAddressline3());
+				collectionCenter.setLocation(collectionCenterDetailsFullUpdateRequset.getLocation());
+				collectionCenter.setWaste_type(collectionCenterDetailsFullUpdateRequset.getWastetype());
+				collectionCenter.setPayment(collectionCenterDetailsFullUpdateRequset.getPayment());
+				collectionCenter.setDescription(collectionCenterDetailsFullUpdateRequset.getDescription());
+//				if (collectionCenterDetailsFullUpdateRequset.getStatus().equals("off")) {
+//					collectionCenter.setActive_or_disable(false);
+//				} else if (collectionCenterDetailsFullUpdateRequset.getStatus().equals("on")) {
+//					collectionCenter.setActive_or_disable(true);
+//				}
+				collectionCenterRepository.save(collectionCenter);
+				commonResponse.setResponse("Collection center details updated successfully");
+				commonResponse.setStatus(true);
+				return commonResponse;
 			} else {
 				commonResponse.setResponse("Invalid username");
 				commonResponse.setStatus(false);
@@ -195,7 +195,7 @@ public class ProfileService {
 				collectionCenter.setPayment(collectionCenterDetailAddRequest.getPayment());
 				collectionCenter.setDescription(collectionCenterDetailAddRequest.getDescription());
 //				collectionCenter.setCollectionCenter_WorkingDays(collectionCenterDetailAddRequest.getWorkingDays());
-				collectionCenter.setMoreDetailStatus(true);
+//				collectionCenter.setMoreDetailStatus(true);
 				collectionCenterRepository.save(collectionCenter);
 				commonResponse.setResponse("Collection center new details added  successfully");
 				commonResponse.setStatus(true);

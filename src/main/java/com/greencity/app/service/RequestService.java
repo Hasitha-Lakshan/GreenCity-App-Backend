@@ -31,7 +31,9 @@ public class RequestService {
 			User customer = userRepository.findByUsername(requestCreatingRequest.getCustomerUsername());
 			CollectionCenter collectionCenter = collectionCenterRepository.findByCenterId(requestCreatingRequest.getCollectionCenterId());
 			
-			if (collectionCenter != null && collectionCenter.isActive_or_disable()) {
+			if (collectionCenter != null 
+//					&& collectionCenter.isActive_or_disable()
+					) {
 				if (customer != null) {
 					Customer_Request newRequest = new Customer_Request();
 					
