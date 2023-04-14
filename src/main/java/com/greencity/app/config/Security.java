@@ -41,11 +41,9 @@ public class Security extends WebSecurityConfigurerAdapter {
 		httpSecurity.cors();
 		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/auth/**").permitAll();
 		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/public/**").permitAll();
-//		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/profile/user/**").permitAll();
-//		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/profile/collectionCenter/**").permitAll();
-//		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/profile/collectionCenter/collectionCenter").permitAll();
-		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/profile/user/**").access("hasRole('USER') or hasRole('ADMIN')");
-		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/profile/collectionCenter/**").access("hasRole('COLLECTION_CENTER') or hasRole('ADMIN')");
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/profile/userSettings/**").access("hasRole('USER') or hasRole('ADMIN')");;
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/profile/collectionCenterSettings/**").access("hasRole('COLLECTION_CENTER') or hasRole('ADMIN')");
+		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/profile/collectionCenterDetails/**").access("hasRole('COLLECTION_CENTER') or hasRole('ADMIN')");
 		httpSecurity.csrf().disable().authorizeRequests().antMatchers("/api/request/**").access("hasRole('COLLECTION_CENTER') or hasRole('USER') or hasRole('ADMIN')");
 		
 		
