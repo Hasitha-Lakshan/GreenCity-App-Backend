@@ -3,12 +3,15 @@ package com.greencity.app.entity;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.CollectionTable;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.NotEmpty;
@@ -60,26 +63,25 @@ public class CollectionCenter {
 	private String description;
 	@NotEmpty
 	@Column
-	private String waste_type;
+	private String wasteType;
 	@NotEmpty
 	@Column
 	private int payment;
 	@NotEmpty
 	@Column
 	private boolean active;
+
+	@ElementCollection
+	@CollectionTable(name = "working_days", joinColumns = @JoinColumn(name = "center_id"))
+	@Column(name = "day")
+	private List<String> workingDays;
+
 	@NotEmpty
 	@Column
 	private boolean accountStatus;
 
-	/////////////////////////// Relationships //////////////////////////////////
-
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collectionCenter", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<CollectionCenter_WorkingDays> collectionCenter_WorkingDays;
-
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collectionCenter", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Customer_Request> requests;
-
-	////////////////////////////////////////////////////////////////////////////
 
 	public int getCenterId() {
 		return centerId;
@@ -169,12 +171,12 @@ public class CollectionCenter {
 		this.description = description;
 	}
 
-	public String getWaste_type() {
-		return waste_type;
+	public String getWasteType() {
+		return wasteType;
 	}
 
-	public void setWaste_type(String waste_type) {
-		this.waste_type = waste_type;
+	public void setWasteType(String wasteType) {
+		this.wasteType = wasteType;
 	}
 
 	public int getPayment() {
@@ -193,20 +195,20 @@ public class CollectionCenter {
 		this.active = active;
 	}
 
+	public List<String> getWorkingDays() {
+		return workingDays;
+	}
+
+	public void setWorkingDays(List<String> workingDays) {
+		this.workingDays = workingDays;
+	}
+
 	public boolean isAccountStatus() {
 		return accountStatus;
 	}
 
 	public void setAccountStatus(boolean accountStatus) {
 		this.accountStatus = accountStatus;
-	}
-
-	public List<CollectionCenter_WorkingDays> getCollectionCenter_WorkingDays() {
-		return collectionCenter_WorkingDays;
-	}
-
-	public void setCollectionCenter_WorkingDays(List<CollectionCenter_WorkingDays> collectionCenter_WorkingDays) {
-		this.collectionCenter_WorkingDays = collectionCenter_WorkingDays;
 	}
 
 	public List<Customer_Request> getRequests() {

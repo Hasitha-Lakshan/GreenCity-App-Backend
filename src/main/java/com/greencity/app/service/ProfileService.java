@@ -1,5 +1,9 @@
 package com.greencity.app.service;
 
+import java.util.ArrayList;
+
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -129,6 +133,7 @@ public class ProfileService {
 	}
 
 	// This function is used to get collection center details
+	@Transactional
 	public CollectionCenterDetailsResponse getCollectionCenterDetails(ProfileRequest profileRequest) {
 		if (profileRequest != null && profileRequest.getRole().equals("COLLECTION_CENTER")) {
 			CollectionCenter collectionCenter = collectionCenterRepository.findByUsername(profileRequest.getUsername());
@@ -142,10 +147,18 @@ public class ProfileService {
 				collectionCenterDetailsResponse.setAddressLine2(collectionCenter.getAddressLine2());
 				collectionCenterDetailsResponse.setAddressLine3(collectionCenter.getAddressLine3());
 				collectionCenterDetailsResponse.setLocation(collectionCenter.getLocation());
-				collectionCenterDetailsResponse.setWasteType(collectionCenter.getWaste_type());
+				collectionCenterDetailsResponse.setWasteType(collectionCenter.getWasteType());
 				collectionCenterDetailsResponse.setPayment(collectionCenter.getPayment());
 				collectionCenterDetailsResponse.setDescription(collectionCenter.getDescription());
 				collectionCenterDetailsResponse.setActive(collectionCenter.isActive());
+
+				if (collectionCenter.getWorkingDays() != null) {
+					ArrayList<String> workingDays = new ArrayList<String>();
+					for (String workingDay : collectionCenter.getWorkingDays()) {
+						workingDays.add(workingDay);
+					}
+					collectionCenterDetailsResponse.setWorkingDays(workingDays);
+				}
 				return collectionCenterDetailsResponse;
 			}
 		}
@@ -159,10 +172,14 @@ public class ProfileService {
 			CollectionCenter collectionCenter = collectionCenterRepository
 					.findByUsername(collectionCenterDetailsUpdateRequest.getUsername());
 			if (collectionCenter != null) {
-				collectionCenter.setWaste_type(collectionCenterDetailsUpdateRequest.getWasteType());
+				collectionCenter.setWasteType(collectionCenterDetailsUpdateRequest.getWasteType());
 				collectionCenter.setPayment(collectionCenterDetailsUpdateRequest.getPayment());
 				collectionCenter.setDescription(collectionCenterDetailsUpdateRequest.getDescription());
 				collectionCenter.setActive(collectionCenterDetailsUpdateRequest.getActive());
+
+				if (collectionCenterDetailsUpdateRequest.getWorkingDays() != null) {
+					collectionCenter.setWorkingDays(collectionCenterDetailsUpdateRequest.getWorkingDays());
+				}
 				collectionCenterRepository.save(collectionCenter);
 
 				commonResponse.setResponse("Collection center details updated successfully");

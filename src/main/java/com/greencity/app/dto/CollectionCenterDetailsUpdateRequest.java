@@ -1,10 +1,13 @@
 package com.greencity.app.dto;
 
+import java.util.List;
+
 public class CollectionCenterDetailsUpdateRequest {
 	private String username;
 	private String wasteType;
 	private int payment;
 	private String description;
+	private List<String> workingDays;
 	private Boolean active;
 
 	public String getUsername() {
@@ -37,6 +40,14 @@ public class CollectionCenterDetailsUpdateRequest {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<String> getWorkingDays() {
+		return workingDays;
+	}
+
+	public void setWorkingDays(List<String> workingDays) {
+		this.workingDays = workingDays;
 	}
 
 	public Boolean getActive() {
