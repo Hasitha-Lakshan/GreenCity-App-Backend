@@ -4,7 +4,7 @@ public class UserSettingsUpdateRequest {
 	private String username;
 	private String firstName;
 	private String lastName;
-	private int contactNumber;
+	private String contactNumber;
 	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
@@ -34,11 +34,11 @@ public class UserSettingsUpdateRequest {
 		this.lastName = lastName;
 	}
 
-	public int getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 

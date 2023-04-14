@@ -42,7 +42,7 @@ public class User {
 	private String password;
 	@NotEmpty
 	@Column(length = 10, unique = true)
-	private int contactNumber;
+	private String contactNumber;
 	@NotEmpty
 	@Column(unique = true)
 	private String email;
@@ -108,11 +108,11 @@ public class User {
 		this.password = password;
 	}
 
-	public int getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
@@ -162,6 +162,14 @@ public class User {
 
 	public void setAdmin(boolean isAdmin) {
 		this.isAdmin = isAdmin;
+	}
+
+	public List<Customer_Request> getRequest() {
+		return request;
+	}
+
+	public void setRequest(List<Customer_Request> request) {
+		this.request = request;
 	}
 
 }

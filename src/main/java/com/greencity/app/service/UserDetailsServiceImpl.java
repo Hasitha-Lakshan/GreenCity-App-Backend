@@ -31,29 +31,29 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
 		User user = userRepository.findByUsername(username);
 		CollectionCenter collectionCenter = collectionCenterRepository.findByUsername(username);
-		UserDetail usedetail = new UserDetail();
+		UserDetail userdetail = new UserDetail();
 
 		if (user != null) {
-			usedetail.setUsername(user.getUsername());
-			usedetail.setPassword(user.getPassword());
-			usedetail.setStatus(user.isAccountStatus());
+			userdetail.setUsername(user.getUsername());
+			userdetail.setPassword(user.getPassword());
+			userdetail.setStatus(user.isAccountStatus());
 
 			if (user.isAdmin()) {
-				usedetail.setUserRole("ADMIN");
+				userdetail.setUserRole("ADMIN");
 			} else {
-				usedetail.setUserRole("USER");
+				userdetail.setUserRole("USER");
 			}
 		}
 
 		if (collectionCenter != null) {
-			usedetail.setUsername(collectionCenter.getUsername());
-			usedetail.setPassword(collectionCenter.getPassword());
-			usedetail.setStatus(collectionCenter.isAccountStatus());
-			usedetail.setUserRole("COLLECTION_CENTER");
+			userdetail.setUsername(collectionCenter.getUsername());
+			userdetail.setPassword(collectionCenter.getPassword());
+			userdetail.setStatus(collectionCenter.isAccountStatus());
+			userdetail.setUserRole("COLLECTION_CENTER");
 		}
 
-		return new org.springframework.security.core.userdetails.User(usedetail.getUsername(), usedetail.getPassword(),
-				true, true, true, usedetail.getStatus(), getAuthorities("ROLE_" + usedetail.getUserRole()));
+		return new org.springframework.security.core.userdetails.User(userdetail.getUsername(), userdetail.getPassword(),
+				true, true, true, userdetail.getStatus(), getAuthorities("ROLE_" + userdetail.getUserRole()));
 	}
 
 	private Collection<? extends GrantedAuthority> getAuthorities(String role_user) {

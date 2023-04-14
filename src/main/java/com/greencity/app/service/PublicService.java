@@ -40,7 +40,7 @@ public class PublicService {
 				item.setAddressLine2(collectionCenter.getAddressLine2());
 				item.setAddressLine3(collectionCenter.getAddressLine3());
 				item.setLocation(collectionCenter.getLocation());
-				item.setWastetype(collectionCenter.getWaste_type());
+				item.setWasteType(collectionCenter.getWaste_type());
 				response.add(item);
 			}
 		}
@@ -63,7 +63,7 @@ public class PublicService {
 				collectionCenterDetailsResponse.setAddressLine2(collectionCenter.getAddressLine2());
 				collectionCenterDetailsResponse.setAddressLine3(collectionCenter.getAddressLine3());
 				collectionCenterDetailsResponse.setLocation(collectionCenter.getLocation());
-				collectionCenterDetailsResponse.setWastetype(collectionCenter.getWaste_type());
+				collectionCenterDetailsResponse.setWasteType(collectionCenter.getWaste_type());
 				collectionCenterDetailsResponse.setPayment(collectionCenter.getPayment());
 				collectionCenterDetailsResponse.setDescription(collectionCenter.getDescription());
 				return collectionCenterDetailsResponse;

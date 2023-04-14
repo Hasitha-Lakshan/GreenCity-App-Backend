@@ -1,13 +1,12 @@
 package com.greencity.app.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.greencity.app.dto.CollectionCenterDetailsResponse;
 import com.greencity.app.dto.CollectionCenterDetailsUpdateRequest;
 import com.greencity.app.dto.CollectionCenterSettingsResponse;
-import com.greencity.app.dto.CollectionCenterSettingsUpdateRequset;
+import com.greencity.app.dto.CollectionCenterSettingsUpdateRequest;
 import com.greencity.app.dto.CommonResponse;
 import com.greencity.app.dto.ProfileRequest;
 import com.greencity.app.dto.UserSettingsResponse;
@@ -29,9 +28,6 @@ public class ProfileService {
 	@Autowired
 	private CommonResponse<String> commonResponse;
 
-	@Autowired
-	private PasswordEncoder passwordEncoder;
-
 	// This function is used to get user settings using username
 	public UserSettingsResponse getUserSettings(ProfileRequest profileDetailsRequest) {
 		if (profileDetailsRequest != null && profileDetailsRequest.getRole().equals("USER")) {
@@ -51,7 +47,7 @@ public class ProfileService {
 		}
 		return null;
 	}
-	
+
 	// This function is used to update user settings using username
 	public CommonResponse<String> updateUserSettings(UserSettingsUpdateRequest userSettingsUpdateRequest) {
 		if (userSettingsUpdateRequest != null) {
@@ -64,7 +60,7 @@ public class ProfileService {
 				user.setAddressLine2(userSettingsUpdateRequest.getAddressLine2());
 				user.setAddressLine3(userSettingsUpdateRequest.getAddressLine3());
 				userRepository.save(user);
-				
+
 				commonResponse.setResponse("User details updated successfully");
 				commonResponse.setStatus(true);
 				return commonResponse;
@@ -101,11 +97,13 @@ public class ProfileService {
 		}
 		return null;
 	}
-	
+
 	// This function is used to update collection center settings using username
-	public CommonResponse<String> updateCollectionCenterSettings(CollectionCenterSettingsUpdateRequset collectionCenterSettingsUpdateRequset) {
+	public CommonResponse<String> updateCollectionCenterSettings(
+			CollectionCenterSettingsUpdateRequest collectionCenterSettingsUpdateRequset) {
 		if (collectionCenterSettingsUpdateRequset != null) {
-			CollectionCenter collectionCenter = collectionCenterRepository.findByUsername(collectionCenterSettingsUpdateRequset.getUsername());
+			CollectionCenter collectionCenter = collectionCenterRepository
+					.findByUsername(collectionCenterSettingsUpdateRequset.getUsername());
 			if (collectionCenter != null) {
 				collectionCenter.setCentertName(collectionCenterSettingsUpdateRequset.getCenterName());
 				collectionCenter.setContactNumber(collectionCenterSettingsUpdateRequset.getContactNumber());
@@ -114,7 +112,7 @@ public class ProfileService {
 				collectionCenter.setAddressLine3(collectionCenterSettingsUpdateRequset.getAddressLine3());
 				collectionCenter.setLocation(collectionCenterSettingsUpdateRequset.getLocation());
 				collectionCenterRepository.save(collectionCenter);
-				
+
 				commonResponse.setResponse("Collection center details updated successfully");
 				commonResponse.setStatus(true);
 				return commonResponse;
@@ -144,7 +142,7 @@ public class ProfileService {
 				collectionCenterDetailsResponse.setAddressLine2(collectionCenter.getAddressLine2());
 				collectionCenterDetailsResponse.setAddressLine3(collectionCenter.getAddressLine3());
 				collectionCenterDetailsResponse.setLocation(collectionCenter.getLocation());
-				collectionCenterDetailsResponse.setWastetype(collectionCenter.getWaste_type());
+				collectionCenterDetailsResponse.setWasteType(collectionCenter.getWaste_type());
 				collectionCenterDetailsResponse.setPayment(collectionCenter.getPayment());
 				collectionCenterDetailsResponse.setDescription(collectionCenter.getDescription());
 				collectionCenterDetailsResponse.setActive(collectionCenter.isActive());
@@ -155,21 +153,18 @@ public class ProfileService {
 	}
 
 	// This function is used to update collection center details
-	public CommonResponse<String> updateCollectionCenterDetails(CollectionCenterDetailsUpdateRequest collectionCenterDetailsUpdateRequest) {
+	public CommonResponse<String> updateCollectionCenterDetails(
+			CollectionCenterDetailsUpdateRequest collectionCenterDetailsUpdateRequest) {
 		if (collectionCenterDetailsUpdateRequest != null) {
-			CollectionCenter collectionCenter = collectionCenterRepository.findByUsername(collectionCenterDetailsUpdateRequest.getUsername());
+			CollectionCenter collectionCenter = collectionCenterRepository
+					.findByUsername(collectionCenterDetailsUpdateRequest.getUsername());
 			if (collectionCenter != null) {
-				collectionCenter.setCentertName(collectionCenterDetailsUpdateRequest.getCentername());
-				collectionCenter.setContactNumber(collectionCenterDetailsUpdateRequest.getContactnumber());
-				collectionCenter.setAddressLine1(collectionCenterDetailsUpdateRequest.getAddressline1());
-				collectionCenter.setAddressLine2(collectionCenterDetailsUpdateRequest.getAddressline2());
-				collectionCenter.setAddressLine3(collectionCenterDetailsUpdateRequest.getAddressline3());
-				collectionCenter.setLocation(collectionCenterDetailsUpdateRequest.getLocation());
-				collectionCenter.setWaste_type(collectionCenterDetailsUpdateRequest.getWastetype());
+				collectionCenter.setWaste_type(collectionCenterDetailsUpdateRequest.getWasteType());
 				collectionCenter.setPayment(collectionCenterDetailsUpdateRequest.getPayment());
 				collectionCenter.setDescription(collectionCenterDetailsUpdateRequest.getDescription());
+				collectionCenter.setActive(collectionCenterDetailsUpdateRequest.getActive());
 				collectionCenterRepository.save(collectionCenter);
-				
+
 				commonResponse.setResponse("Collection center details updated successfully");
 				commonResponse.setStatus(true);
 				return commonResponse;
@@ -183,10 +178,6 @@ public class ProfileService {
 			commonResponse.setStatus(false);
 			return commonResponse;
 		}
-	}
-
-	private Boolean encodePassword(String rawPassword, String encodedPassword) {
-		return passwordEncoder.matches(rawPassword, encodedPassword);
 	}
 
 }

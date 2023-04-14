@@ -3,7 +3,7 @@ package com.greencity.app.dto;
 public class CollectionCenterSettingsResponse {
 	private String username;
 	private String centerName;
-	private int contactNumber;
+	private String contactNumber;
 	private String email;
 	private String addressLine1;
 	private String addressLine2;
@@ -27,11 +27,11 @@ public class CollectionCenterSettingsResponse {
 		this.centerName = centerName;
 	}
 
-	public int getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 

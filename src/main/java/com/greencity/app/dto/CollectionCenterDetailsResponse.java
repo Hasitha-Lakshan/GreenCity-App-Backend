@@ -3,14 +3,14 @@ package com.greencity.app.dto;
 public class CollectionCenterDetailsResponse {
 	private String username;
 	private String centerName;
-	private int contactNumber;
+	private String contactNumber;
 	private String email;
 	private String addressLine1;
 	private String addressLine2;
 	private String addressLine3;
 	private String location;
 	private String description;
-	private String wastetype;
+	private String wasteType;
 	private int payment;
 	private Boolean active;
 	private boolean accountStatus;
@@ -31,11 +31,11 @@ public class CollectionCenterDetailsResponse {
 		this.centerName = centerName;
 	}
 
-	public int getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
@@ -87,12 +87,12 @@ public class CollectionCenterDetailsResponse {
 		this.description = description;
 	}
 
-	public String getWastetype() {
-		return wastetype;
+	public String getWasteType() {
+		return wasteType;
 	}
 
-	public void setWastetype(String wastetype) {
-		this.wastetype = wastetype;
+	public void setWasteType(String wasteType) {
+		this.wasteType = wasteType;
 	}
 
 	public int getPayment() {

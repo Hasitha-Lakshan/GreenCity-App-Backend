@@ -40,7 +40,7 @@ public class CollectionCenter {
 	private String password;
 	@NotEmpty
 	@Column(length = 10, unique = true)
-	private int contactNumber;
+	private String contactNumber;
 	@NotEmpty
 	@Column(unique = true)
 	private String email;
@@ -113,11 +113,11 @@ public class CollectionCenter {
 		this.password = password;
 	}
 
-	public int getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(int contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 
@@ -216,4 +216,5 @@ public class CollectionCenter {
 	public void setRequests(List<Customer_Request> requests) {
 		this.requests = requests;
 	}
+
 }
