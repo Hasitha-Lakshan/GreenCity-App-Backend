@@ -80,8 +80,10 @@ public class CollectionCenter {
 	@Column
 	private boolean accountStatus;
 
+	// Relationships
+
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "collectionCenter", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<Customer_Request> requests;
+	private List<PickupRequest> requests;
 
 	public int getCenterId() {
 		return centerId;
@@ -211,11 +213,11 @@ public class CollectionCenter {
 		this.accountStatus = accountStatus;
 	}
 
-	public List<Customer_Request> getRequests() {
+	public List<PickupRequest> getRequests() {
 		return requests;
 	}
 
-	public void setRequests(List<Customer_Request> requests) {
+	public void setRequests(List<PickupRequest> requests) {
 		this.requests = requests;
 	}
 

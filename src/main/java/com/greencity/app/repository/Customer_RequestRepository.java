@@ -5,11 +5,11 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.greencity.app.entity.CollectionCenter;
-import com.greencity.app.entity.Customer_Request;
+import com.greencity.app.entity.PickupRequest;
 
-public interface Customer_RequestRepository extends JpaRepository<Customer_Request, Integer> {
+public interface Customer_RequestRepository extends JpaRepository<PickupRequest, Integer> {
 
-	Customer_Request findByRequestId(int requestId);
+	PickupRequest findByRequestId(int requestId);
 
 //	List<Customer_Request> findByCustomerAndOrderStatus(User user, String requestStatus);
 //
@@ -17,5 +17,5 @@ public interface Customer_RequestRepository extends JpaRepository<Customer_Reque
 
 	void deleteByRequestId(int requestId);
 
-	List<Customer_Request> findByCollectionCenter(CollectionCenter collectionCenter);
+	List<PickupRequest> findByCollectionCenter(CollectionCenter collectionCenter);
 }

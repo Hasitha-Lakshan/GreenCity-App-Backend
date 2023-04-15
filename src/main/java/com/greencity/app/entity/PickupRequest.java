@@ -23,8 +23,8 @@ import lombok.Setter;
 @AllArgsConstructor
 
 @Entity
-@Table(name = "Customer_Request")
-public class Customer_Request {
+@Table(name = "pickup_requests")
+public class PickupRequest {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,7 +37,7 @@ public class Customer_Request {
 	private float quantity;
 	@NotEmpty
 	@Column
-	private float totalPayment;
+	private int totalPayment;
 	@NotEmpty
 	@Column
 	private Date createdDate;
@@ -59,7 +59,7 @@ public class Customer_Request {
 	@Column
 	private String collectionLocation;
 
-	/////////////////////////// Relationships //////////////////////////////////
+	// Relationships
 
 	@ManyToOne
 	@JoinColumn(name = "userId")
@@ -68,8 +68,6 @@ public class Customer_Request {
 	@ManyToOne
 	@JoinColumn(name = "centerId")
 	private CollectionCenter collectionCenter;
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public int getRequestId() {
 		return requestId;
@@ -95,11 +93,11 @@ public class Customer_Request {
 		this.quantity = quantity;
 	}
 
-	public float getTotalPayment() {
+	public int getTotalPayment() {
 		return totalPayment;
 	}
 
-	public void setTotalPayment(float totalPayment) {
+	public void setTotalPayment(int totalPayment) {
 		this.totalPayment = totalPayment;
 	}
 

@@ -1,5 +1,6 @@
 package com.greencity.app.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,18 +9,19 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.greencity.app.dto.CommonResponse;
-import com.greencity.app.dto.RequestCreatingRequest;
+import com.greencity.app.dto.PickupRequestRequest;
 import com.greencity.app.service.RequestService;
 
 @RestController
-@RequestMapping("/api/request")
+@RequestMapping("/api/pickup")
 public class RequestController {
 	
+	@Autowired
 	private RequestService requestService;
 	
-	@PostMapping("/requestcreation/")
+	@PostMapping("/newRequest")
 	public ResponseEntity<CommonResponse<String>> createRequest(
-			@RequestBody RequestCreatingRequest requestCreatingRequest) {
-		return new ResponseEntity<>(requestService.createRequest(requestCreatingRequest),HttpStatus.OK);
+			@RequestBody PickupRequestRequest pickupRequestRequest) {
+		return new ResponseEntity<>(requestService.createRequest(pickupRequestRequest),HttpStatus.OK);
 	}
 }

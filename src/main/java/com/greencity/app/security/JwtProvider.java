@@ -45,7 +45,7 @@ public class JwtProvider {
 	public String generateToken(Authentication authentication) {
 
 		User princlipal = (User) authentication.getPrincipal();
-		Date validity = new Date(new Date().getTime() + 300000);
+		Date validity = new Date(new Date().getTime() + 3000000);
 
 		return Jwts.builder().setSubject(princlipal.getUsername()).claim("authorities", princlipal.getAuthorities())
 				.setExpiration(validity).signWith(getPrivateKey()).compact();
