@@ -59,7 +59,7 @@ public class CollectionCenter {
 	@Column
 	private String location;
 	@NotEmpty
-	@Column
+	@Column(length = 300)
 	private String description;
 	@NotEmpty
 	@Column
