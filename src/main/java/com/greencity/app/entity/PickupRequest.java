@@ -29,7 +29,6 @@ public class PickupRequest {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int requestId;
-	@NotEmpty
 	@Column(length = 300)
 	private String note;
 	@NotEmpty
@@ -41,11 +40,12 @@ public class PickupRequest {
 	@NotEmpty
 	@Column
 	private Date createdDate;
-	@NotEmpty
 	@Column
 	private Date completedDate;
+	@Column
+	private Date acceptedDate;
 	@NotEmpty
-	@Column(columnDefinition = "enum('INPROGRESS','ACTIVE','COMPLETE','CANCEL')")
+	@Column(columnDefinition = "enum('INPROGRESS','ACTIVE','COMPLETED','CANCELED')")
 	private String requestStatus;
 	@NotEmpty
 	@Column
@@ -115,6 +115,14 @@ public class PickupRequest {
 
 	public void setCompletedDate(Date completedDate) {
 		this.completedDate = completedDate;
+	}
+
+	public Date getAcceptedDate() {
+		return acceptedDate;
+	}
+
+	public void setAcceptedDate(Date acceptedDate) {
+		this.acceptedDate = acceptedDate;
 	}
 
 	public String getRequestStatus() {
