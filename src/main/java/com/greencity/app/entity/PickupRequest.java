@@ -44,6 +44,8 @@ public class PickupRequest {
 	private Date completedDate;
 	@Column
 	private Date acceptedDate;
+	@Column
+	private Date canceledDate;
 	@NotEmpty
 	@Column(columnDefinition = "enum('INPROGRESS','ACTIVE','COMPLETED','CANCELED')")
 	private String requestStatus;
@@ -123,6 +125,14 @@ public class PickupRequest {
 
 	public void setAcceptedDate(Date acceptedDate) {
 		this.acceptedDate = acceptedDate;
+	}
+
+	public Date getCanceledDate() {
+		return canceledDate;
+	}
+
+	public void setCanceledDate(Date canceledDate) {
+		this.canceledDate = canceledDate;
 	}
 
 	public String getRequestStatus() {
