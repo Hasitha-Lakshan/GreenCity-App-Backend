@@ -1,12 +1,5 @@
 package com.greencity.app.dto;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Setter;
-
-@Data
-@Setter
-@AllArgsConstructor
 public class UserDetail {
 
 	private String username;

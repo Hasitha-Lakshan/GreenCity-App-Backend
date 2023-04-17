@@ -3,13 +3,6 @@ package com.greencity.app.dto;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.Setter;
-
-@Data
-@Setter
-@AllArgsConstructor
 @Component
 @Scope()
 public class CommonResponse<T> {
