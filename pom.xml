@@ -97,6 +97,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
+		<finalName>green-city-app-backend</finalName>
 	</build>
 
 </project>
